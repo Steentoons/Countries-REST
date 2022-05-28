@@ -1,7 +1,12 @@
 import React from 'react'
+import { useEffect } from 'react'
 
 const CountryCard = (props) => {
  
+  useEffect(() => {
+    console.log("I am called??????")
+  }, [])
+  
   
   return (
     <>
