@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Frontend Mentor - REST Countries API with color theme switcher
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Technologies used in the Project
+- React Js
+- Axios
+- React Hooks
 
-## Available Scripts
+## What I Learnt
+### Storing data from useEffect Hook
 
-In the project directory, you can run:
+To store data in a useEffect Hook, I needed to create a state first to keep the data in. I would then use setState to store the data which can then be used by the rest of the component, or passed to the other children using props.
+```
+const [values, setValues] = useState("")
 
-### `npm start`
+  useEffect(() => {
+    const val = "value"
+    setValues(val)
+  }, [])
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  console.log(values)
+```
+### Not to store JSX components in state
+I was making a huge mistake trying to map through an array, and storing the result inside a state, so as to loop through creating the components on state change. I found a solution to that by storing different arrays in the state and looping through them, creating new components from outside React Hooks.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+An example of what I did wrong... inside the useEffect
+```
+useEffect(() => {
+// Storing the cards with all their data before setting the state...
+        const card = props.countries.map((item, index) => {
+          const prop = props.countries[index]
+            return (
+              <CountryCard flag={prop.flags.png} name={prop.name.common} population={prop.population} region={prop.region} capital={prop.capital} />
+            )
+        })
 
-### `npm test`
+        const card = <CountryCard flag="flag" name="name" population="98797" region="region" capital="capital" />
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+        setCountryCardState(card)
+}, [props.countries])
+```
+My fix...
+```
+const [displayedCountries, setDisplayedCountries] = useState([])
+useEffect(() => {
+  setDisplayedCountries(props.countries)
+}, [props.countries])
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+// in the component Return...
+return(
+<div>
+{
+  displayedCountries.map((item, index) => {
+            const prop = displayedCountries[index]
+              return (
+                <CountryCard flag={prop.flags.png} name={prop.name.common} population={prop.population} region={prop.region} capital={prop.capital} />
+              )
+          })
+}
+</div>
+)
+```
