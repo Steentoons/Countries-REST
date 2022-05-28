@@ -21,17 +21,6 @@ const CountryCardContainer = (props) => {
       if(props.searchInput === "") {
         console.log("====================================Done")
 
-        // Storing the cards with all their data before setting the state...
-        // const card = props.countries.map((item, index) => {
-        //   const prop = props.countries[index]
-        //     return (
-        //       <CountryCard flag={prop.flags.png} name={prop.name.common} population={prop.population} region={prop.region} capital={prop.capital} />
-        //     )
-        // })
-
-        // const card = <CountryCard flag="flag" name="name" population="98797" region="region" capital="capital" />
-
-        // setCountryCardState(card)
         // console.log("This is country card state...")
         // console.log(props.countryCardState)
 
@@ -48,57 +37,36 @@ const CountryCardContainer = (props) => {
     if(props.searchInput === "" ) {
       console.log("input is empty")
 
-      // Storing the cards with all their data before setting the state...
-      // const card = props.countries.map((item, index) => {
-      //   const prop = props.countries[index]
-      //     return (
-      //       <CountryCard flag={prop.flags.png} name={prop.name.common} population={prop.population} region={prop.region} capital={prop.capital} />
-      //     )
-      // })
-
-      // const card = '<CountryCard flag="flag" name="name" population="98797" region="region" capital="capital" />'
-
-
-      // Setting the state
-      // setCountryCardState(card)
       setDisplayedCountries(props.countries)
    }
    else if (props.searchInput !== "") {
      console.log("Input is not empty")
 
-    // Printing the filtered countries...
-    let filteredCountriesArr = props.countries.filter((item, index) => {
+     const isSearchValid = (index) => {
       const prop = props.countries[index]
-      return (
-        props.searchInput === prop.name.common
-      )
+      const countriesLowercase = prop.name.common.toLowerCase()
+        return (countriesLowercase.includes(props.searchInput))
+    }
+
+    // Printing the filtered countries...
+    const filteredCountriesArr = props.countries.filter((item, index) => {
+      console.log(isSearchValid(index))
+
     });
 
+    console.log("!!!!!!!!!!")
+    console.log(filteredCountriesArr)
+
+  
     setFilteredCountries(filteredCountriesArr)
     setDisplayedCountries(filteredCountries)
-
-    // setCountryCardState(
-    //   filteredCountries.map((item, index) => {
-    //     const prop = props.countries[index]
-    //       return (
-    //         <CountryCard flag={prop.flags.png} name={prop.name.common} population={prop.population} region={prop.region} capital={prop.capital} />
-    //       )
-    //   })
-    // )
    }
 
 
   }, [props.searchInput])
-
-  // Mapping through data to display all the countries in browser...
-  // const displayCountries = 
     
   return (
     <div>
-        {/* { CountryCardState }  */}
-
-        {console.log("------------------------------------")}
-        {console.log(displayedCountries)}
         {
           displayedCountries.map((item, index) => {
             const prop = displayedCountries[index]
