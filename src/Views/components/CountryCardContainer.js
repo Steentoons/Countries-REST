@@ -42,17 +42,14 @@ const CountryCardContainer = (props) => {
    else if (props.searchInput !== "") {
      console.log("Input is not empty")
 
-     const isSearchValid = (index) => {
+     const isSearchValid = (item,index) => {
       const prop = props.countries[index]
       const countriesLowercase = prop.name.common.toLowerCase()
         return (countriesLowercase.includes(props.searchInput))
     }
 
     // Printing the filtered countries...
-    const filteredCountriesArr = props.countries.filter((item, index) => {
-      console.log(isSearchValid(index))
-
-    });
+    const filteredCountriesArr = props.countries.filter(isSearchValid);
 
     console.log("!!!!!!!!!!")
     console.log(filteredCountriesArr)
