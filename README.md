@@ -59,3 +59,57 @@ return(
 </div>
 )
 ```
+
+### Not to call a function inside a Array Filter directly
+I constantly got an error on the same while trying to invoke a function directly inside the array filter method, saying that the filter is not a function...
+```
+const str = [
+  {
+    name: 'gorilla',
+    age: 35
+  }, 
+  {
+    name: 'ape',
+    age: 50
+  }, 
+  {
+    name: 'chipanzee',
+    age: 40
+  }
+] 
+
+const fn = (item, index) => {
+  return (str[index].name === 'gorilla')
+}
+
+const filtered = str.filter(fn(item, index)) 
+
+console.log(filtered)
+```
+
+How I fixed that... Not directly invoking a function inside the filter... It automatically provides the custom function with all the required arguments to use in expressions
+
+```
+const str = [
+  {
+    name: 'gorilla',
+    age: 35
+  }, 
+  {
+    name: 'ape',
+    age: 50
+  }, 
+  {
+    name: 'chipanzee',
+    age: 40
+  }
+] 
+
+const fn = (item, index) => {
+  return (str[index].name === 'gorilla')
+}
+
+const filtered = str.filter(fn) 
+
+console.log(filtered)
+```

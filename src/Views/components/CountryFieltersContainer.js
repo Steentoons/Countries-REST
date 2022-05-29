@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import FilterDropdownContainer from "./FilterDropdownContainer"
 
 const CountryFieltersContainer = (props) => {
 
@@ -11,6 +12,8 @@ const CountryFieltersContainer = (props) => {
             props.setSearchInput(ev)
             // props.setSearchInputLength(evLength)
         }} />
+
+        {/* <FilterDropdownContainer /> */}
 
         {console.log(props.searchInput)}
     </div>
