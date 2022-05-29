@@ -7,6 +7,7 @@ import { useEffect } from "react";
 
 import CountryFieltersContainer from '../Views/components/CountryFieltersContainer';
 import CountryCardContainer from '../Views/components/CountryCardContainer';
+import FilterDropdownContainer from '../Views/components/FilterDropdownContainer';
 
 const CountryDataContainer = () => {
 
@@ -15,6 +16,8 @@ const CountryDataContainer = () => {
     const [countries, setCountries] = useState([])
       const [searchInput, setSearchInput] = useState("")
       const [searchInputLength, setSearchInputLength] = useState(0)
+      const[currentRegion, setCurrentRegion] = useState('')
+      const [filteredRegions, setFilteredRegions] = useState([])
 
 
     // Fetching countries...
@@ -54,6 +57,7 @@ const CountryDataContainer = () => {
         <div className="App" onClick={() => fetchCountries()}>
           <CountryFieltersContainer searchInput={searchInput} setSearchInput = {setSearchInput} searchInputLength={searchInputLength} setSearchInputLength={setSearchInputLength}/>
           {/* {renderCountryCard} */}
+          <FilterDropdownContainer />
           <CountryCardContainer countries={countries} searchInput={searchInput} searchInputLength={searchInputLength} />
         </div>
       );

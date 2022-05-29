@@ -1,0 +1,39 @@
+import React, { useState, useEffect } from 'react'
+
+const FilterDropdownContainer = (props) => {
+const [isDroppedDown, setIsDroppedDown] = useState(false)
+
+useEffect(() => {
+  const el = document.getElementById("regionDropdown")
+  if(isDroppedDown === true) {
+    el.style.display = "block"
+  }
+  if(isDroppedDown === false) {
+    el.style.display = "none"
+  }
+}, [isDroppedDown])
+
+
+const openDropdown = () => {
+  setIsDroppedDown(!isDroppedDown)
+}
+
+const selectRegion = () => {
+  
+}
+
+  return (
+    <div>
+        <div onClick={() => {openDropdown()}}>Fielter by region</div>
+        <div id="regionDropdown">
+            <div onClick={(e) => {selectRegion(e)}}>Africa</div>
+            <div onClick={(e) => {selectRegion(e)}}>America</div>
+            <div onClick={(e) => {selectRegion(e)}}>Asia</div>
+            <div onClick={(e) => {selectRegion(e)}}>Europe</div>
+            <div onClick={(e) => {selectRegion(e)}}>Ocenia</div>
+        </div>
+    </div>
+  )
+}
+
+export default FilterDropdownContainer
