@@ -15,11 +15,15 @@ useEffect(() => {
 
 
 const openDropdown = () => {
+  props.setSearchInput("")
   setIsDroppedDown(!isDroppedDown)
 }
 
-const selectRegion = () => {
-  
+const selectRegion = (e) => {
+  props.setSearchInput("")
+  const val = e.target.textContent.toLowerCase()
+
+  props.setCurrentRegion(val)
 }
 
   return (

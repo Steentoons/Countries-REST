@@ -1,23 +1,19 @@
-import React, { useState } from 'react'
-import FilterDropdownContainer from "./FilterDropdownContainer"
+import React, { useState } from "react";
+import FilterDropdownContainer from "./FilterDropdownContainer";
 
 const CountryFieltersContainer = (props) => {
-
   return (
     <div>
-        {/* Using every keypress... */}
-        <input type="text" onChange={(e) => {    
-            const ev = e.target.value 
-            const evLength = e.target.value.length      
-            props.setSearchInput(ev)
-            // props.setSearchInputLength(evLength)
-        }} />
-
-        {/* <FilterDropdownContainer /> */}
-
-        {console.log(props.searchInput)}
+      {/* Using every keypress... */}
+      <input
+        type="text"
+        onChange={(e) => {
+          const ev = e.target.value;
+          props.setSearchInput(ev);
+        }}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default CountryFieltersContainer
+export default CountryFieltersContainer;
