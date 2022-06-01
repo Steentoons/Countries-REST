@@ -65,6 +65,8 @@ const CountryCardContainer = (props) => {
             population={prop.population}
             region={prop.region}
             capital={prop.capital}
+            setViewedCountry={props.setViewedCountry}
+            countries={props.countries}
           />
         );
       })}
