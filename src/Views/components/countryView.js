@@ -2,19 +2,26 @@ import React, { useEffect, useState } from 'react'
 
 let printBorders
 
+// Component...
 const CountryView = (props) => {
-  const filterBorder = () => {
-    const test = [{
-      name: {
-        common: "Steen Country"
-      }
-    }]
-    return test
+
+  // Returning the country object with the borders... 
+  const filterBorder = (border) => {
+
+    const filteredBorder = (item) => {
+      const country = item.cca3
+
+      return country === border
+    }
+
+    const countries = props.countries
+    const borderObj = countries.filter(filteredBorder)
+    return borderObj
   }
 
   useEffect(() => {
       printBorders = props.viewedCountryState.borders.map((item, idx) => {
-      const bordersArr = filterBorder()
+      const bordersArr = filterBorder(item)
       const borders = bordersArr[0]
   
       if(allBorders !== []) {
@@ -25,7 +32,6 @@ const CountryView = (props) => {
         <li key={idx}>{borders.name.common}</li>
       )
     })
-    console.log(props.viewedCountryState.borders)
   }, [])
 
   const [allBorders, setAllBorders] = useState([])
