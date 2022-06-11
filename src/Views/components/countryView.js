@@ -1,9 +1,9 @@
 import React from 'react'
 
-const countryView = () => {
+const CountryView = () => {
   return (
     <div>Individual Country here</div>
   )
 }
 
-export default countryView
+export default CountryView

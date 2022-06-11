@@ -1,8 +1,11 @@
 import React from 'react'
+import CountryDataContainer from '../../Data/CountryDataContainer'
 
-const Homepage = () => {
+const Homepage = (props) => {
   return (
-    <div>Homepage</div>
+    <>
+      <CountryDataContainer setViewedCountryState={props.setViewedCountryState} />
+    </>
   )
 }
 

@@ -4,13 +4,15 @@ import axios from "axios";
 
 import { useState } from "react";
 import { useEffect } from "react";
+import {Routes, Route} from "react-router-dom"
 
 import CountryFieltersContainer from "../Views/components/CountryFieltersContainer";
 import CountryCardContainer from "../Views/components/CountryCardContainer";
 import FilterDropdownContainer from "../Views/components/FilterDropdownContainer";
-import countryView from "../Views/components/countryView";
+import countryView from "../Views/components/CountryView";
+import ViewPage from "../Views/pages/ViewPage";
 
-const CountryDataContainer = () => {
+const CountryDataContainer = (props) => {
   // const [renderCountryCard, setRenderCountryCard] = useState("")
 
   const [countries, setCountries] = useState([]);
@@ -18,7 +20,6 @@ const CountryDataContainer = () => {
   const [searchInputLength, setSearchInputLength] = useState(0);
   const [currentRegion, setCurrentRegion] = useState("");
   const [filteredRegions, setFilteredRegions] = useState([]);
-  const [viewedCountry, setViewedCountry] = useState({})
 
   // Fetching countries...
   useEffect(() => {
@@ -73,8 +74,9 @@ const CountryDataContainer = () => {
         searchInputLength={searchInputLength}
         currentRegion={currentRegion}
         setCurrentRegion={setCurrentRegion}
-        setViewedCountry={setViewedCountry}
+        setViewedCountryState={props.setViewedCountryState}
       />
+
     </div>
   );
 };
