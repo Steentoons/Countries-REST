@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react'
+import CountryView from '../components/CountryView'
 
 const ViewPage = (props) => {
   useEffect(() => {
@@ -8,7 +9,9 @@ const ViewPage = (props) => {
   }, [])
   
   return (
-    <div>ViewPage</div>
+    <div>
+      <CountryView countries={props.countries} viewedCountryState={props.viewedCountryState} />
+    </div>
   )
 }
 

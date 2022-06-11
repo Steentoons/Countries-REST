@@ -4,7 +4,7 @@ import CountryDataContainer from '../../Data/CountryDataContainer'
 const Homepage = (props) => {
   return (
     <>
-      <CountryDataContainer setViewedCountryState={props.setViewedCountryState} />
+      <CountryDataContainer countries={props.countries} setCountries={props.setCountries} setViewedCountryState={props.setViewedCountryState} />
     </>
   )
 }

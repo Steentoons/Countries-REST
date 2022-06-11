@@ -4,39 +4,21 @@ import axios from "axios";
 
 import { useState } from "react";
 import { useEffect } from "react";
-import {Routes, Route} from "react-router-dom"
 
 import CountryFieltersContainer from "../Views/components/CountryFieltersContainer";
 import CountryCardContainer from "../Views/components/CountryCardContainer";
 import FilterDropdownContainer from "../Views/components/FilterDropdownContainer";
-import countryView from "../Views/components/CountryView";
-import ViewPage from "../Views/pages/ViewPage";
 
 const CountryDataContainer = (props) => {
   // const [renderCountryCard, setRenderCountryCard] = useState("")
-
-  const [countries, setCountries] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [searchInputLength, setSearchInputLength] = useState(0);
   const [currentRegion, setCurrentRegion] = useState("");
-  const [filteredRegions, setFilteredRegions] = useState([]);
 
   // Fetching countries...
   useEffect(() => {
     fetchCountries();
   }, []);
-
-  // useEffect(() => {
-  //   if(countries !== []) {
-  //     setRenderCountryCard(<CountryCardContainer countries={countries} searchInput={searchInput} searchInputLength={searchInputLength} />)
-  //   }
-  // }, [countries])
-
-  // useEffect(() => {
-  //   countries.forEach(item => {
-  //     console.log(item.name.official)
-  //   })
-  // }, [countries])
 
   // Function to call API...
   const fetchCountries = async () => {
@@ -47,7 +29,7 @@ const CountryDataContainer = (props) => {
 
       const newData = [...data];
 
-      setCountries(newData);
+      props.setCountries(newData);
       // console.log(data)
     } catch (error) {
       console.log(error);
@@ -69,7 +51,7 @@ const CountryDataContainer = (props) => {
         setSearchInput={setSearchInput}
       />
       <CountryCardContainer
-        countries={countries}
+        countries={props.countries}
         searchInput={searchInput}
         searchInputLength={searchInputLength}
         currentRegion={currentRegion}
