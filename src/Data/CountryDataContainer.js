@@ -15,6 +15,7 @@ const CountryDataContainer = (props) => {
   const [searchInputLength, setSearchInputLength] = useState(0);
   const [currentRegion, setCurrentRegion] = useState("");
 
+
   // Fetching countries...
   useEffect(() => {
     fetchCountries();

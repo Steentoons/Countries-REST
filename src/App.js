@@ -14,7 +14,7 @@ function App() {
         <Routes>
         {/* <CountryDataContainer /> */}
         <Route path="/" element={ <Homepage countries={countries} setCountries={setCountries} setViewedCountryState={setViewedCountryState} /> } />
-        <Route path="/view-country" element={ <ViewPage countries={countries} viewedCountryState={viewedCountryState} /> } />
+        <Route path="/view-country" element={ <ViewPage countries={countries} viewedCountryState={viewedCountryState} setViewedCountryState={setViewedCountryState} /> } />
       </Routes>
       </Router>
   )

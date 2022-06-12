@@ -4,7 +4,6 @@ import { useEffect } from "react";
 
 const CountryCardContainer = (props) => {
   // Ititializing the country card state...
-  // const [CountryCardState, setCountryCardState] = useState("")
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [displayedCountries, setDisplayedCountries] = useState([]);
 
@@ -48,6 +47,7 @@ const CountryCardContainer = (props) => {
     }
   }, [props.searchInput]);
 
+  // Invoking filter for the regions...
   useEffect(() => {
     if (props.currentRegion !== "") {
       filter();
@@ -60,6 +60,7 @@ const CountryCardContainer = (props) => {
         const prop = displayedCountries[index];
         return (
           <CountryCard
+            key={index}
             flag={prop.flags.png}
             name={prop.name.common}
             population={prop.population}
