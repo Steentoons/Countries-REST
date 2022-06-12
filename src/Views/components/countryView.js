@@ -83,7 +83,7 @@ const CountryView = (props) => {
           allBorders.map((item, idx) => {
 
             return (
-              <li key={idx}>{item.name.common}</li>
+              <li key={idx} onClick={(e) => viewBorderHandler(e)}>{item.name.common}</li>
             )
           })
         }
