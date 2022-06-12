@@ -60,7 +60,7 @@ const CountryView = (props) => {
     setAllBorders(borders)
 
     console.log("Miracle...")
-    console.log(borders)
+    console.log(borders)  
 
   }, [props.viewedCountryState])
 
@@ -79,7 +79,14 @@ const CountryView = (props) => {
   return (
     <div>
       <ul>
-        {printBorders}
+        {
+          allBorders.map((item, idx) => {
+
+            return (
+              <li key={idx}>{item.name.common}</li>
+            )
+          })
+        }
       </ul>  
     </div>
   )
