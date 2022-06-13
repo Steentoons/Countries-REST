@@ -6,9 +6,39 @@ let printBorders
 const CountryView = (props) => {
 
   const [allBorders, setAllBorders] = useState([])
+  const [clickedBorderCountry, setClickedBorderCountry] = useState("")
 
-  // Returning the country object with the borders... 
-  const filterBorder = (border) => {
+    // Function to filter border countries matching clicked element....
+    const filteredBorderCurrent = (countryName) => {
+
+      const allBordersFilter = item => {
+        const borderCountry = item.name.common.toLowerCase()
+  
+        return borderCountry === countryName
+      }
+      const filteredBorder = allBorders.filter(allBordersFilter)
+  
+      return filteredBorder[0]
+    }
+
+  // Border event Handler...
+  const viewBorderHandler = e => {
+    e.preventDefault()
+
+    const countryName = e.currentTarget.innerHTML.toLowerCase()
+
+    setClickedBorderCountry(countryName)
+
+    const filteredBorder = filteredBorderCurrent(countryName)
+
+    console.log("Check Check....")
+    console.log(filteredBorder)
+
+    props.setViewedCountryState(filteredBorder)
+  }
+
+   // Returning the country object with the borders from border updater... 
+   const filterBorder = (border) => {
 
     const filteredBorder = (item) => {
       const country = item.cca3
@@ -21,19 +51,7 @@ const CountryView = (props) => {
     return borderObj
   }
 
-  // Border event Handler...
-  const viewBorderHandler = e => {
-    e.preventDefault()
-
-    const countryName = e.currentTarget.innerHTML.toLowerCase()
-    const filteredBorder = filteredBorderCurrent(countryName)
-
-    console.log(filteredBorder)
-
-    props.setViewedCountryState(filteredBorder)
-  }
-
-  // Printing the Border Countries and creating an eventListener...
+  // Function that stores the border countries in an array....
   const updateBorder = (borderArray) => {
     console.log("Whats happening...")
     console.log(props.viewedCountryState)
@@ -46,13 +64,20 @@ const CountryView = (props) => {
         // console.log(bordersArr)
     })
 
+    borderArray.forEach(item => {
+      let countryName = item.name.common.toLowerCase()
+      console.log("What if....")
+        console.log(clickedBorderCountry)
+        console.log(countryName)
+    })
+
     return(
       borderArray
     )
   }
 
 
-  // Storing all Border Objects
+  // Storing all Border Objects in State...
   useEffect(() => {
     const borderArray = []
     const borders = updateBorder(borderArray)
@@ -64,20 +89,9 @@ const CountryView = (props) => {
 
   }, [props.viewedCountryState])
 
-  const filteredBorderCurrent = (countryName) => {
-
-    const allBordersFilter = item => {
-      const borderCountry = item.name.common.toLowerCase()
-
-      return borderCountry === countryName
-    }
-    const filteredBorder = allBorders.filter(allBordersFilter)
-
-    return filteredBorder[0]
-  }
-
   return (
     <div>
+      <h1>{props.viewedCountryState.name.common}</h1>
       <ul>
         {
           allBorders.map((item, idx) => {
