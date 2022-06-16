@@ -2,6 +2,8 @@ import ViewPage from "./Views/pages/ViewPage"
 import Homepage from "./Views/pages/Homepage";
 import {useState} from "react"
 
+import "./Views/assets/css/main.css"
+
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
 
@@ -9,6 +11,7 @@ function App() {
 
   const [countries, setCountries] = useState([]);
   const [viewedCountryState, setViewedCountryState] = useState({})
+
   return (
       <Router>
         <Routes>

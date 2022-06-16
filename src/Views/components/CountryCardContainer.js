@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import CountryCard from "./CountryCard";
 import { useEffect } from "react";
 
+import "../components/styles/countryCard.css"
+
 const CountryCardContainer = (props) => {
   // Ititializing the country card state...
   const [filteredCountries, setFilteredCountries] = useState([]);
@@ -55,7 +57,7 @@ const CountryCardContainer = (props) => {
   }, [props.currentRegion]);
 
   return (
-    <div>
+    <div className="country-display-container">
       {displayedCountries.map((item, index) => {
         const prop = displayedCountries[index];
         return (

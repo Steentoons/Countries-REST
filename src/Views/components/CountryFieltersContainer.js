@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import FilterDropdownContainer from "./FilterDropdownContainer";
 
 const CountryFieltersContainer = (props) => {
   return (

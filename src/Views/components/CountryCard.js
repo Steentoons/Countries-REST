@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+import "../components/styles/countryCard.css"
+
 const CountryCard = (props) => {
   const navigate = useNavigate()
   // Looping through the country object...
@@ -44,15 +46,21 @@ const CountryCard = (props) => {
     navigate("/view-country", { replace: true })
   };
 
+  const flag = {
+    backgroundImage: `url(${props.flag})`,
+    backgroundSize: "cover",
+  }
+
   return (
     <>
-      <div>
-        <div onClick={(e) => individualCountry(e)}>
-          <div>{props.flag}</div>
-          <div>{props.name}</div>
-          <div>{props.population}</div>
-          <div>{props.region}</div>
-          <div>{props.capital}</div>
+      <div className="country-card-container">
+        <div className="country-card-div" onClick={(e) => individualCountry(e)}>
+          <div className="country-flag" style={flag}>
+          </div>
+          <div className="country-name">{props.name}</div>
+          <div className="country-population"><span>Population: </span>{props.population}</div>
+          <div className="country-region"><span>Region: </span>{props.region}</div>
+          <div className="country-capital"><span>Capital: </span>{props.capital}</div>
         </div>
       </div>
     </>
