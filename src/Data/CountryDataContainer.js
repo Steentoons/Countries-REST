@@ -1,6 +1,7 @@
 import React from "react";
 
 import axios from "axios";
+import "../Views/assets/css/topSection.css"
 
 import { useState } from "react";
 import { useEffect } from "react";
@@ -14,7 +15,6 @@ const CountryDataContainer = (props) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchInputLength, setSearchInputLength] = useState(0);
   const [currentRegion, setCurrentRegion] = useState("");
-
 
   // Fetching countries...
   useEffect(() => {
@@ -39,18 +39,23 @@ const CountryDataContainer = (props) => {
 
   return (
     <div className="App" onClick={() => fetchCountries()}>
-      <CountryFieltersContainer
-        searchInput={searchInput}
-        setSearchInput={setSearchInput}
-        searchInputLength={searchInputLength}
-        setSearchInputLength={setSearchInputLength}
-      />
-      {/* {renderCountryCard} */}
-      <FilterDropdownContainer
-        currentRegion={currentRegion}
-        setCurrentRegion={setCurrentRegion}
-        setSearchInput={setSearchInput}
-      />
+      <div className="top-section-container">
+        {/* Input... */}
+        <CountryFieltersContainer
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+          searchInputLength={searchInputLength}
+          setSearchInputLength={setSearchInputLength}
+        />
+        {/* {Region...} */}
+        <FilterDropdownContainer
+          currentRegion={currentRegion}
+          setCurrentRegion={setCurrentRegion}
+          setSearchInput={setSearchInput}
+        />
+      </div>
+
+      {/* Country Cards... */}
       <CountryCardContainer
         countries={props.countries}
         searchInput={searchInput}
@@ -59,7 +64,6 @@ const CountryDataContainer = (props) => {
         setCurrentRegion={setCurrentRegion}
         setViewedCountryState={props.setViewedCountryState}
       />
-
     </div>
   );
 };
