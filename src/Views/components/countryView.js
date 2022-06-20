@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
-let printBorders
+import "./styles/countryView.css"
 
 // Component...
 const CountryView = (props) => {
@@ -89,19 +88,60 @@ const CountryView = (props) => {
 
   }, [props.viewedCountryState])
 
-  return (
-    <div>
-      <h1>{props.viewedCountryState.name.common}</h1>
-      <ul>
-        {
-          allBorders.map((item, idx) => {
+  const currencyKey = Object.keys(props.viewedCountryState.currencies)[0]
+  
+  const languagesArr = Object.values(props.viewedCountryState.languages)
 
-            return (
-              <li key={idx} onClick={(e) => viewBorderHandler(e)}>{item.name.common}</li>
-            )
-          })
-        }
-      </ul>  
+  const printLanguages = languagesArr.map((item, index) => {
+    return (
+      <span key={index} className='country-view-languages-span'>{item}, </span>
+    )
+      
+  })
+  return (
+    <div className='country-view-container'>
+      <div className="country-view-content-container">
+        <div className="country-view-flag">
+          <img src={props.viewedCountryState.flags.png} alt={`flag for ${props.viewedCountryState.name.common}`} />
+        </div>
+
+        <div className="country-view-div">
+          <div className="country-view-title">{props.viewedCountryState.name.common}</div>
+          <div className="country-view-content-container">
+            <ul>
+              <div className="country-view-content-list">
+                <li><span>Native Name: </span>{props.viewedCountryState.name.common}</li>
+                <li><span>Population: </span>{props.viewedCountryState.population}</li>
+                <li><span>Region: </span>{props.viewedCountryState.region}</li>
+                <li><span>Sub Region: </span>{props.viewedCountryState.subregion}</li>
+                <li><span>Capital: </span>{props.viewedCountryState.capital[0]}</li>
+              </div>
+              <div className="country-view-content-list">
+                <li><span>Top Level Domain: </span>{props.viewedCountryState.tld[0]}</li>
+                <li><span>Currencies: </span>{props.viewedCountryState.currencies[currencyKey].name}</li>
+                <li><span>Languages: </span>
+                    {printLanguages}
+                  </li>
+              </div>
+            </ul>
+          </div>
+          <div className="country-view-borders">
+            <div className="country-view-border-title">Border Countries:</div> 
+            <ul>
+            {
+              allBorders.map((item, idx) => {
+
+                return (
+                  <li key={idx} onClick={(e) => viewBorderHandler(e)}>{item.name.common}</li>
+                )
+              })
+            }
+          </ul>    
+          </div> 
+        </div>  
+      </div> 
+
+
     </div>
   )
 }
