@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import "./styles/countryView.css"
+import backImg1 from "../assets/images/arrows/arrow light.png"
+import backImg2 from "../assets/images/arrows/arrow dark.png"
+import {Link} from "react-router-dom"
 
 // Component...
 const CountryView = (props) => {
@@ -100,6 +103,10 @@ const CountryView = (props) => {
   })
   return (
     <div className='country-view-container'>
+      <Link to="/" className="country-view-back-button-div">
+        <img src={backImg1} alt="" />
+        <div className="country-view-back-button-div-name">Back</div>
+      </Link>
       <div className="country-view-content-container">
         <div className="country-view-flag">
           <img src={props.viewedCountryState.flags.png} alt={`flag for ${props.viewedCountryState.name.common}`} />

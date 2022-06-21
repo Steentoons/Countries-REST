@@ -86,3 +86,16 @@
 }
 
 .country-view-languages-span {}
+
+.country-view-back-button-div {
+    width: 134px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    gap: 15px;
+    margin: 80px 0;
+    cursor: pointer;
+}
