@@ -9,6 +9,7 @@
 .input-container {
     width: 479px;
     height: 54px;
+    margin-right: 16px;
 }
 
 .input-container input {
@@ -57,4 +58,21 @@
 .region-div div {
     margin-bottom: 10px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+    .top-section-container {
+        width: 100%;
+        display: block;
+        box-sizing: border-box;
+        padding: 0 40px;
+    }
+    .input-container {
+        width: 100%;
+        margin-bottom: 30px;
+        margin-top: 16px;
+    }
+    .region-container {
+        margin-bottom: 40px;
+    }
 }

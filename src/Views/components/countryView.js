@@ -1,156 +1,178 @@
-import React, { useEffect, useState } from 'react'
-import "./styles/countryView.css"
-import backImg1 from "../assets/images/arrows/arrow light.png"
-import backImg2 from "../assets/images/arrows/arrow dark.png"
-import {Link} from "react-router-dom"
+import React, { useEffect, useState } from "react";
+import "./styles/countryView.css";
+import backImg1 from "../assets/images/arrows/arrow light.png";
+import backImg2 from "../assets/images/arrows/arrow dark.png";
+import { Link } from "react-router-dom";
 
 // Component...
 const CountryView = (props) => {
+  const [allBorders, setAllBorders] = useState([]);
+  const [clickedBorderCountry, setClickedBorderCountry] = useState("");
 
-  const [allBorders, setAllBorders] = useState([])
-  const [clickedBorderCountry, setClickedBorderCountry] = useState("")
+  // Function to filter border countries matching clicked element....
+  const filteredBorderCurrent = (countryName) => {
+    const allBordersFilter = (item) => {
+      const borderCountry = item.name.common.toLowerCase();
 
-    // Function to filter border countries matching clicked element....
-    const filteredBorderCurrent = (countryName) => {
+      return borderCountry === countryName;
+    };
+    const filteredBorder = allBorders.filter(allBordersFilter);
 
-      const allBordersFilter = item => {
-        const borderCountry = item.name.common.toLowerCase()
-  
-        return borderCountry === countryName
-      }
-      const filteredBorder = allBorders.filter(allBordersFilter)
-  
-      return filteredBorder[0]
-    }
+    return filteredBorder[0];
+  };
 
   // Border event Handler...
-  const viewBorderHandler = e => {
-    e.preventDefault()
+  const viewBorderHandler = (e) => {
+    e.preventDefault();
 
-    const countryName = e.currentTarget.innerHTML.toLowerCase()
+    const countryName = e.currentTarget.innerHTML.toLowerCase();
 
-    setClickedBorderCountry(countryName)
+    setClickedBorderCountry(countryName);
 
-    const filteredBorder = filteredBorderCurrent(countryName)
+    const filteredBorder = filteredBorderCurrent(countryName);
 
-    console.log("Check Check....")
-    console.log(filteredBorder)
+    console.log("Check Check....");
+    console.log(filteredBorder);
 
-    props.setViewedCountryState(filteredBorder)
-  }
+    props.setViewedCountryState(filteredBorder);
+  };
 
-   // Returning the country object with the borders from border updater... 
-   const filterBorder = (border) => {
-
+  // Returning the country object with the borders from border updater...
+  const filterBorder = (border) => {
     const filteredBorder = (item) => {
-      const country = item.cca3
+      const country = item.cca3;
 
-      return country === border
-    }
+      return country === border;
+    };
 
-    const countries = props.countries
-    const borderObj = countries.filter(filteredBorder)
-    return borderObj
-  }
+    const countries = props.countries;
+    const borderObj = countries.filter(filteredBorder);
+    return borderObj;
+  };
 
   // Function that stores the border countries in an array....
   const updateBorder = (borderArray) => {
-    console.log("Whats happening...")
-    console.log(props.viewedCountryState)
+    console.log("Whats happening...");
+    console.log(props.viewedCountryState);
 
-      props.viewedCountryState.borders.forEach(item => {
-      const bordersArr = filterBorder(item)[0]
+    props.viewedCountryState.borders.forEach((item) => {
+      const bordersArr = filterBorder(item)[0];
 
-      borderArray.push(bordersArr)
+      borderArray.push(bordersArr);
 
-        // console.log(bordersArr)
-    })
+      // console.log(bordersArr)
+    });
 
-    borderArray.forEach(item => {
-      let countryName = item.name.common.toLowerCase()
-      console.log("What if....")
-        console.log(clickedBorderCountry)
-        console.log(countryName)
-    })
+    borderArray.forEach((item) => {
+      let countryName = item.name.common.toLowerCase();
+      console.log("What if....");
+      console.log(clickedBorderCountry);
+      console.log(countryName);
+    });
 
-    return(
-      borderArray
-    )
-  }
-
+    return borderArray;
+  };
 
   // Storing all Border Objects in State...
   useEffect(() => {
-    const borderArray = []
-    const borders = updateBorder(borderArray)
+    const borderArray = [];
+    const borders = updateBorder(borderArray);
 
-    setAllBorders(borders)
+    setAllBorders(borders);
 
-    console.log("Miracle...")
-    console.log(borders)  
+    console.log("Miracle...");
+    console.log(borders);
+  }, [props.viewedCountryState]);
 
-  }, [props.viewedCountryState])
+  const currencyKey = Object.keys(props.viewedCountryState.currencies)[0];
 
-  const currencyKey = Object.keys(props.viewedCountryState.currencies)[0]
-  
-  const languagesArr = Object.values(props.viewedCountryState.languages)
+  const languagesArr = Object.values(props.viewedCountryState.languages);
 
   const printLanguages = languagesArr.map((item, index) => {
     return (
-      <span key={index} className='country-view-languages-span'>{item}, </span>
-    )
-      
-  })
+      <span key={index} className="country-view-languages-span">
+        {item},{" "}
+      </span>
+    );
+  });
   return (
-    <div className='country-view-container'>
-      <Link to="/" className="country-view-back-button-div">
-        <img src={backImg1} alt="" />
-        <div className="country-view-back-button-div-name">Back</div>
-      </Link>
+    <div className="country-view-container">
+      <div className="country-view-button-div">
+        <Link to="/" className="country-view-back-button-div">
+          <img src={backImg1} alt="" />
+          <div className="country-view-back-button-div-name">Back</div>
+        </Link>
+      </div>
       <div className="country-view-content-container">
         <div className="country-view-flag">
-          <img src={props.viewedCountryState.flags.png} alt={`flag for ${props.viewedCountryState.name.common}`} />
+          <img
+            src={props.viewedCountryState.flags.png}
+            alt={`flag for ${props.viewedCountryState.name.common}`}
+          />
         </div>
 
         <div className="country-view-div">
-          <div className="country-view-title">{props.viewedCountryState.name.common}</div>
+          <div className="country-view-title">
+            {props.viewedCountryState.name.common}
+          </div>
           <div className="country-view-content-container">
-            <ul>
-              <div className="country-view-content-list">
-                <li><span>Native Name: </span>{props.viewedCountryState.name.common}</li>
-                <li><span>Population: </span>{props.viewedCountryState.population}</li>
-                <li><span>Region: </span>{props.viewedCountryState.region}</li>
-                <li><span>Sub Region: </span>{props.viewedCountryState.subregion}</li>
-                <li><span>Capital: </span>{props.viewedCountryState.capital[0]}</li>
-              </div>
-              <div className="country-view-content-list">
-                <li><span>Top Level Domain: </span>{props.viewedCountryState.tld[0]}</li>
-                <li><span>Currencies: </span>{props.viewedCountryState.currencies[currencyKey].name}</li>
-                <li><span>Languages: </span>
-                    {printLanguages}
-                  </li>
-              </div>
-            </ul>
+            <div className="country-view-content-list">
+              <ul>
+                <li>
+                  <span>Native Name: </span>
+                  {props.viewedCountryState.name.common}
+                </li>
+                <li>
+                  <span>Population: </span>
+                  {props.viewedCountryState.population}
+                </li>
+                <li>
+                  <span>Region: </span>
+                  {props.viewedCountryState.region}
+                </li>
+                <li>
+                  <span>Sub Region: </span>
+                  {props.viewedCountryState.subregion}
+                </li>
+                <li>
+                  <span>Capital: </span>
+                  {props.viewedCountryState.capital[0]}
+                </li>
+              </ul>
+            </div>
+            <div className="country-view-content-list">
+              <ul>
+                <li>
+                  <span>Top Level Domain: </span>
+                  {props.viewedCountryState.tld[0]}
+                </li>
+                <li>
+                  <span>Currencies: </span>
+                  {props.viewedCountryState.currencies[currencyKey].name}
+                </li>
+                <li>
+                  <span>Languages: </span>
+                  {printLanguages}
+                </li>
+              </ul>
+            </div>
           </div>
           <div className="country-view-borders">
-            <div className="country-view-border-title">Border Countries:</div> 
+            <div className="country-view-border-title">Border Countries:</div>
             <ul>
-            {
-              allBorders.map((item, idx) => {
-
+              {allBorders.map((item, idx) => {
                 return (
-                  <li key={idx} onClick={(e) => viewBorderHandler(e)}>{item.name.common}</li>
-                )
-              })
-            }
-          </ul>    
-          </div> 
-        </div>  
-      </div> 
-
-
+                  <li key={idx} onClick={(e) => viewBorderHandler(e)}>
+                    {item.name.common}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default CountryView
+export default CountryView;

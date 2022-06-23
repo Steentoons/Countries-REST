@@ -16,6 +16,11 @@
     justify-content: space-between;
 }
 
+.country-view-button-div {
+    width: 561px;
+    margin-left: 0px;
+}
+
 .country-view-flag {
     width: 561px;
     flex-shrink: 0;
@@ -48,9 +53,7 @@
     font-family: nunito-semi-bold;
 }
 
-.country-view-content-container {}
-
-.country-view-content-container ul {
+.country-view-content-container {
     width: 100%;
     padding: 0;
     margin: 0;
@@ -65,6 +68,11 @@
 .country-view-content-container li {
     list-style: none;
     margin-bottom: 24px;
+}
+
+.country-view-content-container ul {
+    padding: 0;
+    margin: 0;
 }
 
 .country-view-borders ul {
@@ -85,8 +93,6 @@
     font-size: 16px;
 }
 
-.country-view-languages-span {}
-
 .country-view-back-button-div {
     width: 134px;
     height: 40px;
@@ -98,4 +104,67 @@
     gap: 15px;
     margin: 80px 0;
     cursor: pointer;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 1160px) {
+    .country-view-container {
+        padding: 0;
+    }
+    .country-view-content-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+    .country-view-content-list,
+    .country-view-content-list ul {
+        width: 100%;
+    }
+    .country-view-flag {
+        margin-bottom: 44px;
+        margin-right: 0;
+    }
+    .country-view-div {
+        width: 561px;
+    }
+    .country-view-button-div {
+        width: 561px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .country-view-back-button-div {
+        margin: 27px 0 58px 0;
+    }
+    .country-view-flag {
+        margin-bottom: 44px;
+        margin-right: 0;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 20px;
+    }
+    .country-view-button-div {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 20px;
+    }
+    .country-view-content-list {
+        width: 100%;
+    }
+    .country-view-borders {
+        display: block;
+    }
+    .country-view-borders ul {
+        margin-top: 18px;
+        display: inline-flex;
+    }
+    .country-view-content-container {
+        display: block;
+    }
+    .country-view-div {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 20px;
+    }
 }
