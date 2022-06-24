@@ -10,6 +10,7 @@
     width: 479px;
     height: 54px;
     margin-right: 16px;
+    position: relative;
 }
 
 .input-container input {
@@ -19,9 +20,21 @@
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     box-sizing: border-box;
-    padding: 18px 30px;
+    padding: 18px 30px 18px 72px;
     font-size: 14px;
     font-family: nunito-semi-bold;
+}
+
+.input-container::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-image: url(../images//search/search\ light.png);
+    background-size: cover;
+    margin-top: 20px;
+    margin-left: 32px;
 }
 
 .region-title {
