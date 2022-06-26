@@ -1,16 +1,16 @@
 import React from "react";
 import CountryView from "../components/CountryView";
-import Nav from "../components/Nav"
+import Nav from "../components/Nav";
 
 const ViewPage = (props) => {
-
   return (
     <div>
-      <Nav />
+      <Nav theme={props.theme} setTheme={props.setTheme} />
       <CountryView
+        theme={props.theme}
         countries={props.countries}
         viewedCountryState={props.viewedCountryState}
-        setViewedCountryState={props.setViewedCountryState }
+        setViewedCountryState={props.setViewedCountryState}
       />
     </div>
   );

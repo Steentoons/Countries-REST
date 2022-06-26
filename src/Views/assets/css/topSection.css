@@ -4,6 +4,7 @@
     justify-content: space-between;
     box-sizing: border-box;
     padding: 50px 80px;
+    background: var(--theme-background-clr);
 }
 
 .input-container {
@@ -23,18 +24,8 @@
     padding: 18px 30px 18px 72px;
     font-size: 14px;
     font-family: nunito-semi-bold;
-}
-
-.input-container::before {
-    content: "";
-    position: absolute;
-    display: block;
-    width: 16px;
-    height: 16px;
-    background-image: url(../images//search/search\ light.png);
-    background-size: cover;
-    margin-top: 20px;
-    margin-left: 32px;
+    background: var(--theme-elements-clr);
+    color: var(--theme-input-clr);
 }
 
 .region-title {
@@ -47,6 +38,8 @@
     border-radius: 10px;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
     cursor: pointer;
+    color: var(--theme-text-clr);
+    background: var(--theme-elements-clr);
 }
 
 .region-div-overlay {
@@ -66,6 +59,8 @@
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
     background-color: white;
     margin-top: 6px;
+    color: var(--theme-text-clr);
+    background: var(--theme-elements-clr);
 }
 
 .region-div div {
@@ -79,13 +74,13 @@
         display: block;
         box-sizing: border-box;
         padding: 0 40px;
+        padding-top: 16px;
     }
     .input-container {
         width: 100%;
         margin-bottom: 30px;
-        margin-top: 16px;
     }
     .region-container {
-        margin-bottom: 40px;
+        padding-bottom: 40px;
     }
 }

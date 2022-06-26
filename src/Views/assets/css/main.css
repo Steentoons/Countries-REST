@@ -1,8 +1,3 @@
-body {
-    padding: 0;
-    margin: 0;
-}
-
 @font-face {
     font-family: nunito-light;
     src: url(../fonts/NunitoSans-Light.ttf);
@@ -23,14 +18,22 @@ body {
     font-family: nunito-light;
 }
 
-[data-theme = "light"] {
-    --dark-mode-elements: hsl(209, 23%, 22%);
-    --dark-mode-background: hsl(207, 26%, 17%);
-    --dark-mode-text: hsl(0, 0%, 100%);
+[data-theme="light"] {
+    --theme-elements-clr: hsl(0, 0%, 100%);
+    --theme-background-clr: hsl(0, 0%, 98%);
+    --theme-text-clr: hsl(200, 15%, 8%);
+    --theme-input-clr: hsl(0, 0%, 52%);
 }
 
-[data-theme = "dark"] {
-    --dark-mode-elements: hsl(209, 23%, 22%);
-    --dark-mode-background: hsl(207, 26%, 17%);
-    --dark-mode-text: hsl(0, 0%, 100%);
+[data-theme="dark"] {
+    --theme-elements-clr: hsl(209, 23%, 22%);
+    --theme-background-clr: hsl(207, 26%, 17%);
+    --theme-text-clr: hsl(0, 0%, 100%);
+    --theme-input-clr: hsl(0, 0%, 60%);
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: var(--theme-background-clr);
 }

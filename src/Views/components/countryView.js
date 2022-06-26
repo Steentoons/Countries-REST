@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "./styles/countryView.css";
-import backImg1 from "../assets/images/arrows/arrow light.png";
-import backImg2 from "../assets/images/arrows/arrow dark.png";
+import backImgLight from "../assets/images/arrows/arrow light.png";
+import backImgDark from "../assets/images/arrows/arrow dark.png";
 import { Link } from "react-router-dom";
 
 // Component...
 const CountryView = (props) => {
+
   const [allBorders, setAllBorders] = useState([]);
   const [clickedBorderCountry, setClickedBorderCountry] = useState("");
+
+  const [backIcon, setBackIcon] = useState()
+
+  useEffect(() => {
+    const newBackIcon = props.theme === "light" ? backImgLight : backImgDark
+    setBackIcon(newBackIcon)
+  }, [props.theme])
+  
 
   // Function to filter border countries matching clicked element....
   const filteredBorderCurrent = (countryName) => {
@@ -36,6 +45,8 @@ const CountryView = (props) => {
 
     props.setViewedCountryState(filteredBorder);
   };
+
+
 
   // Returning the country object with the borders from border updater...
   const filterBorder = (border) => {
@@ -75,6 +86,7 @@ const CountryView = (props) => {
 
   // Storing all Border Objects in State...
   useEffect(() => {
+    
     const borderArray = [];
     const borders = updateBorder(borderArray);
 
@@ -96,10 +108,10 @@ const CountryView = (props) => {
     );
   });
   return (
-    <div className="country-view-container">
+    <div className="country-view-container" data-theme={props.theme}>
       <div className="country-view-button-div">
         <Link to="/" className="country-view-back-button-div">
-          <img src={backImg1} alt="" />
+          <img src={backIcon} alt="" />
           <div className="country-view-back-button-div-name">Back</div>
         </Link>
       </div>

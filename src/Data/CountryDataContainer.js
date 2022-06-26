@@ -38,7 +38,7 @@ const CountryDataContainer = (props) => {
   };
 
   return (
-    <div className="App" onClick={() => fetchCountries()}>
+    <div className="App" onClick={() => fetchCountries()} data-theme={props.theme}>
       <div className="top-section-container">
         {/* Input... */}
         <CountryFieltersContainer
@@ -46,6 +46,7 @@ const CountryDataContainer = (props) => {
           setSearchInput={setSearchInput}
           searchInputLength={searchInputLength}
           setSearchInputLength={setSearchInputLength}
+          theme={props.theme}
         />
         {/* {Region...} */}
         <FilterDropdownContainer

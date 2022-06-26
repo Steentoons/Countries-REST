@@ -5,12 +5,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: var(--theme-elements-clr);
 }
 
 .navigation-title {
     font-size: 24px;
     font-family: nunito-extra-bold;
     padding-left: 80px;
+    color: var(--theme-text-clr);
 }
 
 .navigation-button {
@@ -27,6 +29,7 @@
 .navigation-button-name {
     font-size: 16px;
     font-family: nunito-semi-bold;
+    color: var(--theme-text-clr);
 }
 
 @media screen and (max-width: 600px) {

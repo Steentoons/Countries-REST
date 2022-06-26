@@ -1,10 +1,12 @@
 .country-display-container {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-shrink: 0;
     flex-wrap: wrap;
-    gap: 75px;
+    background: var(--theme-background-clr);
+    box-sizing: border-box;
+    padding: 0 80px;
 }
 
 .country-card-container {
@@ -12,6 +14,9 @@
     height: 336px;
     border-radius: 10px;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+    color: var(--theme-text-clr);
+    background: var(--theme-elements-clr);
+    margin-bottom: 60px;
 }
 
 .country-card-div {
@@ -54,4 +59,10 @@
 .country-capital span {
     text-align: left;
     font-family: nunito-semi-bold;
+}
+
+@media screen and (max-width: 710px) {
+    .country-display-container {
+        justify-content: center;
+    }
 }
