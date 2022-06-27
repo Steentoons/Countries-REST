@@ -113,3 +113,38 @@ const filtered = str.filter(fn)
 
 console.log(filtered)
 ```
+
+### The Dark Mode Effect
+First I had to get the current user preferred theme stored in the browser. So that I can manipulate the app to use that as the default theme. I then changed the theme accordingly on click from the theme changer button on the navbar. I also used state to change the icons to match up to the chosen theme.
+
+Getting the current user theme...
+```
+// Check user set theme mode...
+  const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  // Create theme mode state...
+  const [theme, setTheme] = useLocalStorage(
+    "theme",
+    defaultDark ? "dark" : "light"
+  );
+```
+
+Changing the theme on click...
+```
+// Storing and changing the theme...
+  const [moonState, setMoonState] = useState()
+
+  useEffect(() => {
+    const newMoonState = props.theme === "light" ? moonImgLight : moonImgDark;
+    setMoonState(newMoonState)
+  }, [])
+
+  const changeThemeHandler = () => {
+    const newTheme = props.theme === "light" ? "dark" : "light";
+    const newMoonState = moonState === moonImgLight ? moonImgDark : moonImgLight
+    setMoonState(newMoonState)
+
+    props.setTheme(newTheme);
+  }
+```
+
