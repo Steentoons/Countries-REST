@@ -6,7 +6,7 @@ const Homepage = (props) => {
   return (
     <>
       <Nav theme={props.theme} setTheme={props.setTheme} />
-      <CountryDataContainer theme={props.theme} countries={props.countries} setCountries={props.setCountries} setViewedCountryState={props.setViewedCountryState} />
+      <CountryDataContainer theme={props.theme} countries={props.countries} setCountries={props.setCountries} setViewedCountryState={props.setViewedCountryState} viewedCountryState={props.viewedCountryState} />
     </>
   )
 }

@@ -26,7 +26,7 @@ function App() {
       <Router>
         <Routes>
         {/* <CountryDataContainer /> */}
-        <Route path="/" element={ <Homepage theme={theme} setTheme={setTheme} countries={countries} setCountries={setCountries} setViewedCountryState={setViewedCountryState} /> } />
+        <Route path="/" element={ <Homepage theme={theme} setTheme={setTheme} countries={countries} setCountries={setCountries} setViewedCountryState={setViewedCountryState} viewedCountryState={viewedCountryState}  /> } />
         <Route path="/view-country" element={ <ViewPage theme={theme} setTheme={setTheme} countries={countries} viewedCountryState={viewedCountryState} setViewedCountryState={setViewedCountryState} /> } />
       </Routes>
       </Router>

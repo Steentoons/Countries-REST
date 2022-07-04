@@ -64,6 +64,7 @@ const CountryDataContainer = (props) => {
         currentRegion={currentRegion}
         setCurrentRegion={setCurrentRegion}
         setViewedCountryState={props.setViewedCountryState}
+        viewedCountryState={props.viewedCountryState}
       />
     </div>
   );
