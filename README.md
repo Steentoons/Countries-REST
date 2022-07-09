@@ -1,9 +1,30 @@
 # Frontend Mentor - REST Countries API with color theme switcher
 
+## The challenge
+
+Your users should be able to:
+
+- See all countries from the API on the homepage
+- Search for a country using an `input` field
+- Filter countries by region
+- Click on a country to see more detailed information on a separate page
+- Click through to the border countries on the detail page
+- Toggle the color scheme between light and dark mode 
+
+### Links
+
+- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+
 ## Technologies used in the Project
-- React Js
 - Axios
 - React Hooks
+- Desktop-first workflow
+- [React](https://reactjs.org/) - JS library
+- CSS
+- Flexbox
+- CSS Variables
+- Semantic HTML5 markup
 
 ## What I Learnt
 ### Storing data from useEffect Hook
@@ -147,4 +168,38 @@ Changing the theme on click...
     props.setTheme(newTheme);
   }
 ```
+
+### Persistant State using React Router
+I used functional components to persist the viewed country state on browser reload. I set the default state to point to the `sessionStorage` on decraration. I then used hooks on the country view page to update the `sessionStorage` on state change.
+
+Initialization and setting the `sessionStorage`...
+```
+const [viewedCountryState, setViewedCountryState] = useState(JSON.parse(window.sessionStorage.getItem("viewedCountryState")))
+
+useEffect(() => {
+    window.sessionStorage.setItem(
+      "viewedCountryState",
+      JSON.stringify(viewedCountryState)
+    );
+  }, [viewedCountryState]);
+```
+
+On the country view page, subscribing to the state...
+```
+useEffect(() => {
+    window.sessionStorage.setItem(
+      "viewedCountryState",
+      JSON.stringify(props.viewedCountryState)
+    );
+}, [props.viewedCountryState]);
+```
+
+## Author
+
+- Frontend Mentor - [@steentoons](https://www.frontendmentor.io/profile/steentoons)
+- Linkedin - [@steentoons](https://www.linkedin.com/in/steen-toons/)
+- Dribbble - [@steentoons](https://www.dribbble.com/steentoons)
+- GitHub - [@steentoons](https://www.github.com/steentoons)
+
+
 

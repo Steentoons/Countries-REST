@@ -1,6 +1,6 @@
 import ViewPage from "./Views/pages/ViewPage"
 import Homepage from "./Views/pages/Homepage";
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import useLocalStorage from "use-local-storage";
 
 import "./Views/assets/css/main.css"
@@ -21,6 +21,13 @@ function App() {
 
   const [countries, setCountries] = useState([]);
   const [viewedCountryState, setViewedCountryState] = useState({})
+
+  // useEffect(() => {
+  //   window.sessionStorage.setItem(
+  //     "viewedCountryState",
+  //     JSON.stringify(viewedCountryState)
+  //   );
+  // }, [viewedCountryState]);
 
   return (
       <Router>

@@ -87,8 +87,22 @@ const CountryView = (props) => {
   // Storing all Border Objects in State...
   useEffect(() => {
     
+    // window.sessionStorage.setItem(
+    //   "viewedCountryState",
+    //   JSON.stringify(props.viewedCountryState)
+    // );
+
     const borderArray = [];
-    const borders = updateBorder(borderArray);
+    let borders
+    if (props.viewedCountryState.borders === undefined) {
+      console.log("Sent it to undefined")
+      borders = []
+    } else if(props.viewedCountryState.borders !== undefined) {
+      console.log("Sent it to defined")
+      
+      borders = updateBorder(borderArray);
+    }
+    
 
     setAllBorders(borders);
 
@@ -103,7 +117,7 @@ const CountryView = (props) => {
   const printLanguages = languagesArr.map((item, index) => {
     return (
       <span key={index} className="country-view-languages-span">
-        {item},{" "}
+        {item},
       </span>
     );
   });
