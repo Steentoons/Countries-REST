@@ -20,7 +20,26 @@ function App() {
   );
 
   const [countries, setCountries] = useState([]);
-  const [viewedCountryState, setViewedCountryState] = useState({})
+  console.log(countries)
+
+  // const [viewedCountryState, setViewedCountryState] = useState({})
+const [viewedCountryState, setViewedCountryState] = useState(JSON.parse(window.sessionStorage.getItem("viewedCountryState")))
+
+console.log(JSON.stringify(countries))
+
+useEffect(() => {
+    window.sessionStorage.setItem(
+      "viewedCountryState",
+      JSON.stringify(viewedCountryState)
+    );
+  }, [viewedCountryState]);
+
+  // useEffect(() => {
+  //   window.sessionStorage.setItem(
+  //     "countries",
+  //     JSON.stringify(countries)
+  //   );
+  // }, [countries]);
 
   // useEffect(() => {
   //   window.sessionStorage.setItem(

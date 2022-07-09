@@ -17,6 +17,13 @@ const CountryView = (props) => {
     setBackIcon(newBackIcon)
   }, [props.theme])
   
+  // Persisting countries state...
+  useEffect(() => {
+    window.sessionStorage.setItem(
+      "countries",
+      JSON.stringify(props.countries)
+    );
+}, [props.countries]);
 
   // Function to filter border countries matching clicked element....
   const filteredBorderCurrent = (countryName) => {
@@ -50,13 +57,18 @@ const CountryView = (props) => {
 
   // Returning the country object with the borders from border updater...
   const filterBorder = (border) => {
-    const filteredBorder = (item) => {
+    
+    function filteredBorder(item) {
+
       const country = item.cca3;
 
       return country === border;
-    };
+    }
 
     const countries = props.countries;
+    console.log("countries")
+    console.log(countries)
+
     const borderObj = countries.filter(filteredBorder);
     return borderObj;
   };
@@ -64,15 +76,23 @@ const CountryView = (props) => {
   // Function that stores the border countries in an array....
   const updateBorder = (borderArray) => {
     console.log("Whats happening...");
-    console.log(props.viewedCountryState);
+    console.log(props.viewedCountryState); // working...
 
-    props.viewedCountryState.borders.forEach((item) => {
-      const bordersArr = filterBorder(item)[0];
+    if(props.viewedCountryState.borders !== []) {
+      props.viewedCountryState.borders.forEach(item => {
+        // const bordersArr = filterBorder(item)[0];
 
-      borderArray.push(bordersArr);
+        console.log("Filtered was undefined?")
+        console.log(filterBorder(item)[0])
 
-      // console.log(bordersArr)
-    });
+
+  
+        // borderArray.push(bordersArr);
+
+        // console.log(bordersArr)
+  
+      });
+    }
 
     borderArray.forEach((item) => {
       let countryName = item.name.common.toLowerCase();
@@ -91,6 +111,11 @@ const CountryView = (props) => {
     //   "viewedCountryState",
     //   JSON.stringify(props.viewedCountryState)
     // );
+
+    window.sessionStorage.setItem(
+      "viewedCountryState",
+      JSON.stringify(props.viewedCountryState)
+    );
 
     const borderArray = [];
     let borders

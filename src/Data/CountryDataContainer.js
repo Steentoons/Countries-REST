@@ -16,10 +16,12 @@ const CountryDataContainer = (props) => {
   const [searchInputLength, setSearchInputLength] = useState(0);
   const [currentRegion, setCurrentRegion] = useState("");
 
-  // Fetching countries...
-  useEffect(() => {
-    fetchCountries();
-  }, []);
+//   useEffect(() => {
+//     window.sessionStorage.setItem(
+//       "countries",
+//       JSON.stringify(props.coutries)
+//     );
+// }, [props.countries]);
 
   // Function to call API...
   const fetchCountries = async () => {
@@ -31,11 +33,16 @@ const CountryDataContainer = (props) => {
       const newData = [...data];
 
       props.setCountries(newData);
-      // console.log(data)
+      console.log(data)
     } catch (error) {
       console.log(error);
     }
   };
+
+  // Fetching countries...
+  useEffect(() => {
+    fetchCountries();
+  }, []);
 
   return (
     <div className="App" onClick={() => fetchCountries()} data-theme={props.theme}>
