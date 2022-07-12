@@ -11,6 +11,7 @@ const ViewPage = (props) => {
         countries={props.countries}
         viewedCountryState={props.viewedCountryState}
         setViewedCountryState={props.setViewedCountryState}
+        newBordersList={props.newBordersList}
       />
     </div>
   );

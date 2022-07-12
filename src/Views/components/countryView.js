@@ -8,9 +8,24 @@ import { Link } from "react-router-dom";
 const CountryView = (props) => {
 
   const [allBorders, setAllBorders] = useState([]);
+  // const [viewedCountryState, setViewedCountryState] = useState()
+
   const [clickedBorderCountry, setClickedBorderCountry] = useState("");
 
   const [backIcon, setBackIcon] = useState()
+
+  // useEffect(() => {
+
+  //   console.log("Called every time")
+  //   window.sessionStorage.setItem(
+  //     "allBorders",
+  //     JSON.stringify(allBorders)
+  //   );
+  // }, [allBorders]);
+
+  useEffect(() => {
+    setAllBorders(props.newBordersList)
+  }, [allBorders])
 
   useEffect(() => {
     const newBackIcon = props.theme === "light" ? backImgLight : backImgDark
@@ -53,57 +68,6 @@ const CountryView = (props) => {
     props.setViewedCountryState(filteredBorder);
   };
 
-
-
-  // Returning the country object with the borders from border updater...
-  const filterBorder = (border) => {
-    
-    function filteredBorder(item) {
-
-      const country = item.cca3;
-
-      return country === border;
-    }
-
-    const countries = props.countries;
-    console.log("countries")
-    console.log(countries)
-
-    const borderObj = countries.filter(filteredBorder);
-    return borderObj;
-  };
-
-  // Function that stores the border countries in an array....
-  const updateBorder = (borderArray) => {
-    console.log("Whats happening...");
-    console.log(props.viewedCountryState); // working...
-
-    if(props.viewedCountryState.borders !== []) {
-      props.viewedCountryState.borders.forEach(item => {
-        // const bordersArr = filterBorder(item)[0];
-
-        console.log("Filtered was undefined?")
-        console.log(filterBorder(item)[0])
-
-
-  
-        // borderArray.push(bordersArr);
-
-        // console.log(bordersArr)
-  
-      });
-    }
-
-    borderArray.forEach((item) => {
-      let countryName = item.name.common.toLowerCase();
-      console.log("What if....");
-      console.log(clickedBorderCountry);
-      console.log(countryName);
-    });
-
-    return borderArray;
-  };
-
   // Storing all Border Objects in State...
   useEffect(() => {
     
@@ -116,23 +80,6 @@ const CountryView = (props) => {
       "viewedCountryState",
       JSON.stringify(props.viewedCountryState)
     );
-
-    const borderArray = [];
-    let borders
-    if (props.viewedCountryState.borders === undefined) {
-      console.log("Sent it to undefined")
-      borders = []
-    } else if(props.viewedCountryState.borders !== undefined) {
-      console.log("Sent it to defined")
-      
-      borders = updateBorder(borderArray);
-    }
-    
-
-    setAllBorders(borders);
-
-    console.log("Miracle...");
-    console.log(borders);
   }, [props.viewedCountryState]);
 
   const currencyKey = Object.keys(props.viewedCountryState.currencies)[0];
@@ -146,6 +93,14 @@ const CountryView = (props) => {
       </span>
     );
   });
+
+  const printBorders = allBorders !== undefined ? allBorders.map((item, idx) => {
+    return (
+      <li key={idx} onClick={(e) => viewBorderHandler(e)}>
+        {item.name.common}
+      </li>
+    );
+  }) : "The country has no borders"
   return (
     <div className="country-view-container" data-theme={props.theme}>
       <div className="country-view-button-div">
@@ -211,13 +166,7 @@ const CountryView = (props) => {
           <div className="country-view-borders">
             <div className="country-view-border-title">Border Countries:</div>
             <ul>
-              {allBorders.map((item, idx) => {
-                return (
-                  <li key={idx} onClick={(e) => viewBorderHandler(e)}>
-                    {item.name.common}
-                  </li>
-                );
-              })}
+              {}
             </ul>
           </div>
         </div>

@@ -78,6 +78,7 @@ const CountryCardContainer = (props) => {
             setViewedCountryState={props.setViewedCountryState}
             viewedCountryState={props.viewedCountryState}
             countries={props.countries}
+            setNewBordersList={props.setNewBordersList}
           />
         );
       })}

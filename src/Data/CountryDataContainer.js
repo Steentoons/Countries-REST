@@ -33,6 +33,7 @@ const CountryDataContainer = (props) => {
       const newData = [...data];
 
       props.setCountries(newData);
+      console.log("In the beginning...")
       console.log(data)
     } catch (error) {
       console.log(error);
@@ -72,6 +73,7 @@ const CountryDataContainer = (props) => {
         setCurrentRegion={setCurrentRegion}
         setViewedCountryState={props.setViewedCountryState}
         viewedCountryState={props.viewedCountryState}
+        setNewBordersList={props.setNewBordersList}
       />
     </div>
   );

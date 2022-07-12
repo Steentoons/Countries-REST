@@ -1,15 +1,14 @@
-import ViewPage from "./Views/pages/ViewPage"
+import ViewPage from "./Views/pages/ViewPage";
 import Homepage from "./Views/pages/Homepage";
-import {useState, useEffect} from "react"
+import { useState, useEffect } from "react";
 import useLocalStorage from "use-local-storage";
 
-import "./Views/assets/css/main.css"
+import "./Views/assets/css/main.css";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
 
 function App() {
-
   // Check user set theme mode...
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
@@ -20,14 +19,14 @@ function App() {
   );
 
   const [countries, setCountries] = useState([]);
-  console.log(countries)
 
   // const [viewedCountryState, setViewedCountryState] = useState({})
-const [viewedCountryState, setViewedCountryState] = useState(JSON.parse(window.sessionStorage.getItem("viewedCountryState")))
+  const [viewedCountryState, setViewedCountryState] = useState(
+    JSON.parse(window.sessionStorage.getItem("viewedCountryState"))
+  );
+  const [newBordersList, setNewBordersList] = useState([]);
 
-console.log(JSON.stringify(countries))
-
-useEffect(() => {
+  useEffect(() => {
     window.sessionStorage.setItem(
       "viewedCountryState",
       JSON.stringify(viewedCountryState)
@@ -49,14 +48,39 @@ useEffect(() => {
   // }, [viewedCountryState]);
 
   return (
-      <Router>
-        <Routes>
+    <Router>
+      <Routes>
         {/* <CountryDataContainer /> */}
-        <Route path="/" element={ <Homepage theme={theme} setTheme={setTheme} countries={countries} setCountries={setCountries} setViewedCountryState={setViewedCountryState} viewedCountryState={viewedCountryState}  /> } />
-        <Route path="/view-country" element={ <ViewPage theme={theme} setTheme={setTheme} countries={countries} viewedCountryState={viewedCountryState} setViewedCountryState={setViewedCountryState} /> } />
+        <Route
+          path="/"
+          element={
+            <Homepage
+              theme={theme}
+              setTheme={setTheme}
+              countries={countries}
+              setCountries={setCountries}
+              setViewedCountryState={setViewedCountryState}
+              viewedCountryState={viewedCountryState}
+              setNewBordersList={setNewBordersList}
+            />
+          }
+        />
+        <Route
+          path="/view-country"
+          element={
+            <ViewPage
+              theme={theme}
+              setTheme={setTheme}
+              countries={countries}
+              viewedCountryState={viewedCountryState}
+              setViewedCountryState={setViewedCountryState}
+              newBordersList={newBordersList}
+            />
+          }
+        />
       </Routes>
-      </Router>
-  )
-} 
+    </Router>
+  );
+}
 
 export default App;

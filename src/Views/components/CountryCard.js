@@ -14,28 +14,59 @@ const CountryCard = (props) => {
     navigate("/view-country", { replace: true })
   }
 
+  // Returning the country object with the borders from border updater...
+  const filterBorder = (border) => {
+    
+    function filteredBorder(item) {
+
+      const country = item.cca3;
+
+      return country === border;
+    }
+
+    const countries = props.countries;
+    console.log("countries")
+    console.log(countries)
+
+    const borderObj = countries.filter(filteredBorder);
+    return borderObj;
+  };
+
+  // Function that stores the border countries in an array....
+  const updateBorder = (borderArray) => {
+    console.log("Whats happening...");
+    console.log(props.viewedCountryState); // working...
+
+    if(props.viewedCountryState.borders !== []) {
+      props.viewedCountryState.borders.forEach(item => {
+        const bordersArr = filterBorder(item)[0];
+
+
+  
+        borderArray.push(bordersArr);
+
+        console.log(bordersArr)
+  
+      });
+    }
+
+    borderArray.forEach((item) => {
+      let countryName = item.name.common.toLowerCase();
+      console.log("What if....");
+      console.log(countryName);
+    });
+
+    return borderArray;
+  };
+
   useEffect(() => {
 
-    // const isViewedCountryStateEmpty = Object.keys(props.viewedCountryState).length
-
-    // if (isViewedCountryStateEmpty > 0) {
-      
-    //   // alert(props.viewedCountryState);
-    //   console.log("butchery..............................")
-    //   // console.log(props.viewedCountryState)
-    //   // navigate("/view-country", { replace: true })
-    // } 
-
-    // // console.log(isViewedCountryStateEmpty)
-
-    // // if(props.viewedCountryState !== {}) {
-    // //   console.log("butchery..............................")
-    // // }
-
-    // console.log("setViewedCountryHasValue...")
-    // console.log(viewedCountryHasValue)
-
     if(viewedCountryHasValue === true) {
+      
+      const borderArray = props.viewedCountryState.borders !== undefined ? props.viewedCountryState.borders : []
+      const border = updateBorder(borderArray)
+
+      props.setNewBordersList(border)
       testFn()
     }
       
