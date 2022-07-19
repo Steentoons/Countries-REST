@@ -33,12 +33,12 @@ const CountryView = (props) => {
   }, [props.theme])
   
   // Persisting countries state...
-  useEffect(() => {
-    window.sessionStorage.setItem(
-      "countries",
-      JSON.stringify(props.countries)
-    );
-}, [props.countries]);
+//   useEffect(() => {
+//     window.sessionStorage.setItem(
+//       "countries",
+//       JSON.stringify(props.countries)
+//     );
+// }, [props.countries]);
 
   // Function to filter border countries matching clicked element....
   const filteredBorderCurrent = (countryName) => {
@@ -69,18 +69,18 @@ const CountryView = (props) => {
   };
 
   // Storing all Border Objects in State...
-  useEffect(() => {
+  // useEffect(() => {
     
-    // window.sessionStorage.setItem(
-    //   "viewedCountryState",
-    //   JSON.stringify(props.viewedCountryState)
-    // );
+  //   // window.sessionStorage.setItem(
+  //   //   "viewedCountryState",
+  //   //   JSON.stringify(props.viewedCountryState)
+  //   // );
 
-    window.sessionStorage.setItem(
-      "viewedCountryState",
-      JSON.stringify(props.viewedCountryState)
-    );
-  }, [props.viewedCountryState]);
+  //   window.sessionStorage.setItem(
+  //     "viewedCountryState",
+  //     JSON.stringify(props.viewedCountryState)
+  //   );
+  // }, [props.viewedCountryState]);
 
   const currencyKey = Object.keys(props.viewedCountryState.currencies)[0];
 

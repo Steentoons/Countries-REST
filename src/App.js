@@ -20,18 +20,18 @@ function App() {
 
   const [countries, setCountries] = useState([]);
 
-  // const [viewedCountryState, setViewedCountryState] = useState({})
-  const [viewedCountryState, setViewedCountryState] = useState(
-    JSON.parse(window.sessionStorage.getItem("viewedCountryState"))
-  );
+  const [viewedCountryState, setViewedCountryState] = useState({})
+  // const [viewedCountryState, setViewedCountryState] = useState(
+  //   JSON.parse(window.sessionStorage.getItem("viewedCountryState"))
+  // );
   const [newBordersList, setNewBordersList] = useState([]);
 
-  useEffect(() => {
-    window.sessionStorage.setItem(
-      "viewedCountryState",
-      JSON.stringify(viewedCountryState)
-    );
-  }, [viewedCountryState]);
+  // useEffect(() => {
+  //   window.sessionStorage.setItem(
+  //     "viewedCountryState",
+  //     JSON.stringify(viewedCountryState)
+  //   );
+  // }, [viewedCountryState]);
 
   // useEffect(() => {
   //   window.sessionStorage.setItem(

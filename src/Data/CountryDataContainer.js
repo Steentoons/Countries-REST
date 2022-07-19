@@ -33,8 +33,6 @@ const CountryDataContainer = (props) => {
       const newData = [...data];
 
       props.setCountries(newData);
-      console.log("In the beginning...")
-      console.log(data)
     } catch (error) {
       console.log(error);
     }
