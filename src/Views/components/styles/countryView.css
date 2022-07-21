@@ -1,5 +1,6 @@
 .country-view-container {
     width: 100%;
+    min-height: 100vh;
     box-sizing: border-box;
     padding: 0 80px;
     color: var(--theme-text-clr);

@@ -11,6 +11,7 @@ const CountryCard = (props) => {
   const navigate = useNavigate();
   const [clicked, setClicked] = useState(false);
 
+  // Navigate to new country view...
   const navigateFn = () => {
     navigate("/view-country", { replace: true });
   };

@@ -13,7 +13,13 @@ const CountryView = (props) => {
     setAllBorders(props.newBordersList);
   }, []);
 
-  const [clickedBorderCountry, setClickedBorderCountry] = useState("");
+  useEffect(() => {
+    if (props.viewedCountryState.borders) {
+      const newBorders = updateBorder(props.borderArray, props.viewedCountryState.borders, props.countries);
+    setAllBorders(newBorders);
+    }
+  }, [props.viewedCountryState.borders]);
+
   const [backIcon, setBackIcon] = useState();
 
   const currencyKey = Object.keys(props.viewedCountryState.currencies)[0];
@@ -24,43 +30,6 @@ const CountryView = (props) => {
     const newBackIcon = props.theme === "light" ? backImgLight : backImgDark;
     setBackIcon(newBackIcon);
   }, [props.theme]);
-
-  // Function to filter border countries matching clicked element....
-  const filteredBorderCurrent = (countryName) => {
-    const allBordersFilter = (item) => {
-      const borderCountry = item.name.common.toLowerCase();
-
-      return borderCountry === countryName;
-    };
-    const filteredBorder = allBorders.filter(allBordersFilter);
-
-    return filteredBorder[0];
-  };
-
-  // Border event Handler...
-  const viewBorderHandler = (e) => {
-    e.preventDefault();
-
-    const countryName = e.currentTarget.innerHTML.toLowerCase();
-
-    // setClickedBorderCountry(countryName);
-
-    const filteredBorder = filteredBorderCurrent(countryName);
-
-    const borderArray = filteredBorder.borders ? filteredBorder.borders : [];
-
-    const newBorders = updateBorder(
-      borderArray,
-      props.viewedCountryState.borders,
-      props.countries
-    );
-    setAllBorders(newBorders);
-
-    props.setViewedCountryState(filteredBorder);
-    // if(filteredBorder.borders) {
-    //   setAllBorders(filteredBorder.borders)
-    // }
-  };
 
   const printLanguages = languagesArr.map((item, index) => {
     return (
@@ -74,7 +43,19 @@ const CountryView = (props) => {
     allBorders !== undefined && allBorders !== []
       ? allBorders.map((item, idx) => {
           return (
-            <li key={idx} onClick={(e) => viewBorderHandler(e)}>
+            <li
+              key={idx}
+              onClick={(e) =>
+                viewBorderHandler(
+                  e,
+                  props.viewedCountryState.borders,
+                  props.countries,
+                  setAllBorders,
+                  props.setViewedCountryState,
+                  allBorders
+                )
+              }
+            >
               {item.name.common}
             </li>
           );
@@ -154,3 +135,35 @@ const CountryView = (props) => {
 };
 
 export default CountryView;
+
+// Border event Handler...
+const viewBorderHandler = (
+  e,
+  viewedCountryState,
+  countries,
+  setAllBorders,
+  setViewedCountryState,
+  allBorders
+) => {
+  e.preventDefault();
+
+  const countryName = e.currentTarget.innerHTML.toLowerCase();
+
+  const filteredBorder = filteredBorderCurrent(countryName, allBorders);
+
+  const borderArray = filteredBorder.borders ? filteredBorder.borders : [];
+
+  setViewedCountryState(filteredBorder);
+};
+
+// Function to filter border countries matching clicked element....
+const filteredBorderCurrent = (countryName, allBorders) => {
+  const allBordersFilter = (item) => {
+    const borderCountry = item.name.common.toLowerCase();
+
+    return borderCountry === countryName;
+  };
+  const filteredBorder = allBorders.filter(allBordersFilter);
+
+  return filteredBorder[0];
+};
