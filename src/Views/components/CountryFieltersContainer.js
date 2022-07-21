@@ -1,4 +1,3 @@
-// import React, { useState } from "react";
 import searchIconLight from "../assets/images/search/search light.png"
 import searchIconDark from "../assets/images/search/search dark.png"
 import { useState, useEffect } from "react";

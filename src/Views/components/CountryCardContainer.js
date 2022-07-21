@@ -16,12 +16,6 @@ const CountryCardContainer = (props) => {
   // Including the page content once after api call finish...
   useEffect(() => {
 
-    // Persisting countries state...
-    // window.sessionStorage.setItem(
-    //   "countries",
-    //   JSON.stringify(props.countries)
-    // );
-
     if (props.countries.length > 0) {
       if (props.searchInput === "" && props.currentRegion === "") {
         setDisplayedCountries(props.countries);

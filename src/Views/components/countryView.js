@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { updateBorder } from "./fn/countryCardFn";
 import "./styles/countryView.css";
 import backImgLight from "../assets/images/arrows/arrow light.png";
 import backImgDark from "../assets/images/arrows/arrow dark.png";
@@ -6,39 +7,23 @@ import { Link } from "react-router-dom";
 
 // Component...
 const CountryView = (props) => {
-
   const [allBorders, setAllBorders] = useState([]);
-  // const [viewedCountryState, setViewedCountryState] = useState()
+
+  useEffect(() => {
+    setAllBorders(props.newBordersList);
+  }, []);
 
   const [clickedBorderCountry, setClickedBorderCountry] = useState("");
+  const [backIcon, setBackIcon] = useState();
 
-  const [backIcon, setBackIcon] = useState()
+  const currencyKey = Object.keys(props.viewedCountryState.currencies)[0];
+  const languagesArr = Object.values(props.viewedCountryState.languages);
 
-  // useEffect(() => {
-
-  //   console.log("Called every time")
-  //   window.sessionStorage.setItem(
-  //     "allBorders",
-  //     JSON.stringify(allBorders)
-  //   );
-  // }, [allBorders]);
-
+  // Setting the darkmode...
   useEffect(() => {
-    setAllBorders(props.newBordersList)
-  }, [allBorders])
-
-  useEffect(() => {
-    const newBackIcon = props.theme === "light" ? backImgLight : backImgDark
-    setBackIcon(newBackIcon)
-  }, [props.theme])
-  
-  // Persisting countries state...
-//   useEffect(() => {
-//     window.sessionStorage.setItem(
-//       "countries",
-//       JSON.stringify(props.countries)
-//     );
-// }, [props.countries]);
+    const newBackIcon = props.theme === "light" ? backImgLight : backImgDark;
+    setBackIcon(newBackIcon);
+  }, [props.theme]);
 
   // Function to filter border countries matching clicked element....
   const filteredBorderCurrent = (countryName) => {
@@ -58,33 +43,24 @@ const CountryView = (props) => {
 
     const countryName = e.currentTarget.innerHTML.toLowerCase();
 
-    setClickedBorderCountry(countryName);
+    // setClickedBorderCountry(countryName);
 
     const filteredBorder = filteredBorderCurrent(countryName);
 
-    console.log("Check Check....");
-    console.log(filteredBorder);
+    const borderArray = filteredBorder.borders ? filteredBorder.borders : [];
+
+    const newBorders = updateBorder(
+      borderArray,
+      props.viewedCountryState.borders,
+      props.countries
+    );
+    setAllBorders(newBorders);
 
     props.setViewedCountryState(filteredBorder);
+    // if(filteredBorder.borders) {
+    //   setAllBorders(filteredBorder.borders)
+    // }
   };
-
-  // Storing all Border Objects in State...
-  // useEffect(() => {
-    
-  //   // window.sessionStorage.setItem(
-  //   //   "viewedCountryState",
-  //   //   JSON.stringify(props.viewedCountryState)
-  //   // );
-
-  //   window.sessionStorage.setItem(
-  //     "viewedCountryState",
-  //     JSON.stringify(props.viewedCountryState)
-  //   );
-  // }, [props.viewedCountryState]);
-
-  const currencyKey = Object.keys(props.viewedCountryState.currencies)[0];
-
-  const languagesArr = Object.values(props.viewedCountryState.languages);
 
   const printLanguages = languagesArr.map((item, index) => {
     return (
@@ -94,13 +70,17 @@ const CountryView = (props) => {
     );
   });
 
-  const printBorders = allBorders !== undefined ? allBorders.map((item, idx) => {
-    return (
-      <li key={idx} onClick={(e) => viewBorderHandler(e)}>
-        {item.name.common}
-      </li>
-    );
-  }) : "The country has no borders"
+  const printBorders =
+    allBorders !== undefined && allBorders !== []
+      ? allBorders.map((item, idx) => {
+          return (
+            <li key={idx} onClick={(e) => viewBorderHandler(e)}>
+              {item.name.common}
+            </li>
+          );
+        })
+      : "The country has no borders";
+
   return (
     <div className="country-view-container" data-theme={props.theme}>
       <div className="country-view-button-div">
@@ -165,9 +145,7 @@ const CountryView = (props) => {
           </div>
           <div className="country-view-borders">
             <div className="country-view-border-title">Border Countries:</div>
-            <ul>
-              {}
-            </ul>
+            <ul>{printBorders}</ul>
           </div>
         </div>
       </div>

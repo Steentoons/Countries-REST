@@ -9,7 +9,7 @@ import "../components/styles/countryCard.css";
 
 const CountryCard = (props) => {
   const navigate = useNavigate();
-  const [clicked, setClicked] = useState(false)
+  const [clicked, setClicked] = useState(false);
 
   const navigateFn = () => {
     navigate("/view-country", { replace: true });
@@ -22,25 +22,38 @@ const CountryCard = (props) => {
           ? props.viewedCountryState.borders
           : [];
 
-      if(borderArray === []) {} else {
-        const border = updateBorder(borderArray, props.viewedCountryState.borders, props.countries);
+      if (borderArray === []) {
+      } else {
+        const border = updateBorder(
+          borderArray,
+          props.viewedCountryState.borders,
+          props.countries
+        );
 
         props.setNewBordersList(border);
 
         // Navigate to view page...
-      navigateFn();
+        navigateFn();
       }
     }
 
-    return (
-      setClicked(false)
-    )
+    return setClicked(false);
   }, [clicked]);
 
   return (
     <>
       <div className="country-card-container">
-        <div className="country-card-div" onClick={(e) => individualCountry(e, setClicked, props.countries, props.setViewedCountryState)}>
+        <div
+          className="country-card-div"
+          onClick={(e) =>
+            individualCountry(
+              e,
+              setClicked,
+              props.countries,
+              props.setViewedCountryState
+            )
+          }
+        >
           <div className="country-flag" style={getFlag(props.flag)}></div>
           <div className="country-name"> {props.name} </div>
           <div className="country-population">
@@ -65,7 +78,7 @@ export default CountryCard;
 
 // Handle clicked card...
 const individualCountry = (e, setClicked, countries, setViewedCountryState) => {
-  setClicked(true)
+  setClicked(true);
   e.preventDefault();
   const countryNameTrim = e.currentTarget.children[1].innerHTML.trim();
   const countryName = countryNameTrim.toLowerCase();
@@ -73,7 +86,7 @@ const individualCountry = (e, setClicked, countries, setViewedCountryState) => {
   // Filter individual country... // working...
   const currentViewCountry = viewedCountry(countryName, countries); // working...
 
-  if(Object.keys(currentViewCountry).length > 0 ) {
+  if (Object.keys(currentViewCountry).length > 0) {
     setViewedCountryState(currentViewCountry);
   }
 };
@@ -84,5 +97,5 @@ const getFlag = (flag) => {
     backgroundSize: "cover",
   };
 
-  return flags
-}
+  return flags;
+};

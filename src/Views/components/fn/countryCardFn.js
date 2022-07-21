@@ -21,14 +21,13 @@ export const viewedCountry = (countryName, countries) => {
 
 // Function that stores the border countries in an array....
 export const updateBorder = (borderArray, viewedCountryState, countries) => {
-
-    const result = borderArrFn(borderArray, viewedCountryState, countries)
+    const result = borderArrFn(borderArray, viewedCountryState, countries);
 
     return result;
 };
 
 const borderArrFn = (borderArray, viewedCountryState, countries) => {
-    const result = []
+    const result = [];
     if (viewedCountryState !== undefined && viewedCountryState !== []) {
         viewedCountryState.forEach((item) => {
             const bordersArr = filterBorder(item, countries);
@@ -37,8 +36,8 @@ const borderArrFn = (borderArray, viewedCountryState, countries) => {
         });
     }
 
-    return result
-}
+    return result;
+};
 
 // Returning the country object with the borders from border updater... // working...
 const filterBorder = (border, countries) => {
