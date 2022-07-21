@@ -13,24 +13,12 @@ const FilterDropdownContainer = (props) => {
     }
   }, [isDroppedDown]);
 
-  const openDropdown = () => {
-    props.setSearchInput("");
-    setIsDroppedDown(!isDroppedDown);
-  };
-
-  const selectRegion = (e) => {
-    props.setSearchInput("");
-    const val = e.target.textContent.toLowerCase();
-
-    props.setCurrentRegion(val);
-  };
-
   return (
     <div className="region-container">
       <div
         className="region-title"
         onClick={() => {
-          openDropdown();
+          openDropdown(setIsDroppedDown, props.setSearchInput, isDroppedDown);
         }}
       >
         Fielter by region
@@ -39,35 +27,35 @@ const FilterDropdownContainer = (props) => {
         <div className="region-div">
           <div
             onClick={(e) => {
-              selectRegion(e);
+              selectRegion(e, props.setSearchInput, props.setCurrentRegion);
             }}
           >
             Africa
           </div>
           <div
             onClick={(e) => {
-              selectRegion(e);
+              selectRegion(e, props.setSearchInput, props.setCurrentRegion);
             }}
           >
             America
           </div>
           <div
             onClick={(e) => {
-              selectRegion(e);
+              selectRegion(e, props.setSearchInput, props.setCurrentRegion);
             }}
           >
             Asia
           </div>
           <div
             onClick={(e) => {
-              selectRegion(e);
+              selectRegion(e, props.setSearchInput, props.setCurrentRegion);
             }}
           >
             Europe
           </div>
           <div
             onClick={(e) => {
-              selectRegion(e);
+              selectRegion(e, props.setSearchInput, props.setCurrentRegion);
             }}
           >
             Ocenia
@@ -79,3 +67,15 @@ const FilterDropdownContainer = (props) => {
 };
 
 export default FilterDropdownContainer;
+
+const openDropdown = (setIsDroppedDown, setSearchInput, isDroppedDown) => {
+  setSearchInput("");
+  setIsDroppedDown(!isDroppedDown);
+};
+
+const selectRegion = (e, setSearchInput, setCurrentRegion) => {
+  setSearchInput("");
+  const val = e.target.textContent.toLowerCase();
+
+  setCurrentRegion(val);
+};

@@ -29,37 +29,19 @@ const CountryCardContainer = (props) => {
     }
   }, [props.countries]);
 
-  const isSearchValid = (item, index) => {
-    const prop = props.countries[index];
-    const countriesLowercase = prop.name.common.toLowerCase();
-    const regionLowercase = prop.region.toLowerCase();
-
-    if (props.searchInput !== "") {
-      return countriesLowercase.includes(props.searchInput);
-    } else if (props.searchInput === "") {
-      return regionLowercase.includes(props.currentRegion);
-    }
-  };
-
-  const filter = () => {
-    // Printing the filtered countries...
-    const filteredCountriesArr = props.countries.filter(isSearchValid);
-    setFilteredCountries(filteredCountriesArr);
-  };
-
   // Printing all the country cards in reference input search value... And region filters
   useEffect(() => {
     if (props.searchInput === "" && props.currentRegion === "") {
       setDisplayedCountries(props.countries);
     } else if (props.searchInput !== "") {
-      filter();
+      filter(props.countries, props.searchInput, props.currentRegion, setFilteredCountries);
     }
   }, [props.searchInput]);
 
   // Invoking filter for the regions...
   useEffect(() => {
     if (props.currentRegion !== "") {
-      filter();
+      filter(props.countries, props.searchInput, props.currentRegion, setFilteredCountries);
     }
   }, [props.currentRegion]);
 
@@ -87,3 +69,22 @@ const CountryCardContainer = (props) => {
 };
 
 export default CountryCardContainer;
+
+const filter = (countries, searchInput, currentRegion, setFilteredCountries) => {
+
+  const isSearchValid = (item, index) => {
+    const prop = countries[index];
+    const countriesLowercase = prop.name.common.toLowerCase();
+    const regionLowercase = prop.region.toLowerCase();
+  
+    if (searchInput !== "") {
+      return countriesLowercase.includes(searchInput);
+    } else if (searchInput === "") {
+      return regionLowercase.includes(currentRegion);
+    }
+  };
+
+  // Printing the filtered countries...
+  const filteredCountriesArr = countries.filter(isSearchValid);
+  setFilteredCountries(filteredCountriesArr);
+};

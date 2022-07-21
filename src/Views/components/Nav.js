@@ -15,18 +15,10 @@ const Nav = (props) => {
     setMoonState(newMoonState)
   }, [])
 
-  const changeThemeHandler = () => {
-    const newTheme = props.theme === "light" ? "dark" : "light";
-    const newMoonState = moonState === moonImgLight ? moonImgDark : moonImgLight
-    setMoonState(newMoonState)
-
-    props.setTheme(newTheme);
-  }
-
   return (
     <div className='navigation-container' data-theme={props.theme}>
         <div className="navigation-title">Where in the world?</div>
-        <div className="navigation-button" onClick={() => {changeThemeHandler()}}>
+        <div className="navigation-button" onClick={() => {changeThemeHandler(props.theme, moonState, setMoonState, props.setTheme)}}>
             <img src={moonState} alt="" />
             <div className="navigation-button-name">{props.theme === "light" ? "Dark Mode" : "Light Mode"}</div>
         </div>
@@ -35,3 +27,11 @@ const Nav = (props) => {
 }
 
 export default Nav
+
+const changeThemeHandler = (theme, moonState, setMoonState, setTheme) => {
+  const newTheme = theme === "light" ? "dark" : "light";
+  const newMoonState = moonState === moonImgLight ? moonImgDark : moonImgLight
+  setMoonState(newMoonState)
+
+  setTheme(newTheme);
+}

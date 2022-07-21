@@ -37,31 +37,11 @@ const CountryCard = (props) => {
     )
   }, [clicked]);
 
-  // Handle clicked card...
-  const individualCountry = (e) => {
-    setClicked(true)
-    e.preventDefault();
-    const countryNameTrim = e.currentTarget.children[1].innerHTML.trim();
-    const countryName = countryNameTrim.toLowerCase();
-
-    // Filter individual country... // working...
-    const currentViewCountry = viewedCountry(countryName, props.countries); // working...
-
-    if(Object.keys(currentViewCountry).length > 0 ) {
-      props.setViewedCountryState(currentViewCountry);
-    }
-  };
-
-  const flag = {
-    backgroundImage: `url(${props.flag})`,
-    backgroundSize: "cover",
-  };
-
   return (
     <>
       <div className="country-card-container">
-        <div className="country-card-div" onClick={(e) => individualCountry(e)}>
-          <div className="country-flag" style={flag}></div>
+        <div className="country-card-div" onClick={(e) => individualCountry(e, setClicked, props.countries, props.setViewedCountryState)}>
+          <div className="country-flag" style={getFlag(props.flag)}></div>
           <div className="country-name"> {props.name} </div>
           <div className="country-population">
             <span> Population: </span>
@@ -82,3 +62,27 @@ const CountryCard = (props) => {
 };
 
 export default CountryCard;
+
+// Handle clicked card...
+const individualCountry = (e, setClicked, countries, setViewedCountryState) => {
+  setClicked(true)
+  e.preventDefault();
+  const countryNameTrim = e.currentTarget.children[1].innerHTML.trim();
+  const countryName = countryNameTrim.toLowerCase();
+
+  // Filter individual country... // working...
+  const currentViewCountry = viewedCountry(countryName, countries); // working...
+
+  if(Object.keys(currentViewCountry).length > 0 ) {
+    setViewedCountryState(currentViewCountry);
+  }
+};
+
+const getFlag = (flag) => {
+  const flags = {
+    backgroundImage: `url(${flag})`,
+    backgroundSize: "cover",
+  };
+
+  return flags
+}
