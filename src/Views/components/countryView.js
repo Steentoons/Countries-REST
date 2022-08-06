@@ -14,6 +14,13 @@ const CountryView = (props) => {
   }, []);
 
   useEffect(() => {
+    window.sessionStorage.setItem(
+      "viewedCountryState",
+      JSON.stringify(props.viewedCountryState)
+    );
+}, [props.viewedCountryState]);
+
+  useEffect(() => {
     if (props.viewedCountryState.borders) {
       const newBorders = updateBorder(props.borderArray, props.viewedCountryState.borders, props.countries);
     setAllBorders(newBorders);

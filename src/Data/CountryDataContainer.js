@@ -16,13 +16,6 @@ const CountryDataContainer = (props) => {
   const [searchInputLength, setSearchInputLength] = useState(0);
   const [currentRegion, setCurrentRegion] = useState("");
 
-//   useEffect(() => {
-//     window.sessionStorage.setItem(
-//       "countries",
-//       JSON.stringify(props.coutries)
-//     );
-// }, [props.countries]);
-
   // Function to call API...
   const fetchCountries = async () => {
     try {
