@@ -1,5 +1,5 @@
 // Looping through the country object... // working...
-const filterViewed = (country, countries) => {
+export const filterViewed = (country, countries) => {
     const filteredCountries = (item) => {
         const itemLowercase = item.name.common.toLowerCase();
         if (itemLowercase.trim() === country) {
@@ -26,7 +26,7 @@ export const updateBorder = (borderArray, viewedCountryState, countries) => {
     return result;
 };
 
-const borderArrFn = (borderArray, viewedCountryState, countries) => {
+export const borderArrFn = (borderArray, viewedCountryState, countries) => {
     const result = [];
     if (viewedCountryState !== undefined && viewedCountryState !== []) {
         viewedCountryState.forEach((item) => {
@@ -40,7 +40,7 @@ const borderArrFn = (borderArray, viewedCountryState, countries) => {
 };
 
 // Returning the country object with the borders from border updater... // working...
-const filterBorder = (border, countries) => {
+export const filterBorder = (border, countries) => {
     function filteredBorder(item) {
         const country = item.cca3;
 
